@@ -13,11 +13,7 @@ const verifyPassword = async (hash: string, password: string) => {
     try {
         const isValid = await argon2.verify(hash, password);
 
-        if (isValid) {
-            console.log("Password is valid.");
-        } else {
-            console.log("Invalid password.0");
-        }
+        return isValid;
     } catch (e) {
         console.error("error verifying password:", e)
     }
