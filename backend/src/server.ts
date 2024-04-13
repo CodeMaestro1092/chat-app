@@ -6,6 +6,9 @@ import connectToMongoDB from './db/connectToDB';
 const app = express();
 const PORT = config.port || 4000
 
+//middleware
+app.use(express.json())
+
 //routes
 app.use("/api/auth", authRoutes);
 
