@@ -2,19 +2,17 @@ import { Response, Request } from "express";
 import Conversation from "../models/conversation.model";
 import Message from "../models/message.model";
 
-interface sendMessageT extends Request {
+export interface UserIdT extends Request {
     user?: {
         _id: string;
     };
 }
 
-const sendMessage = async (req: sendMessageT, res: Response) => {
+const sendMessage = async (req: UserIdT, res: Response) => {
     try {
         const { message } = req.body;
         const { id: receiverId } = req.params;
-
-        if (!req.user) return res.status(404).json({ error: "User not found" });
-        const senderId = req.user._id
+        const senderId = req.user?._id
 
         let conversation = await Conversation.findOne({
             participants: {
@@ -27,7 +25,7 @@ const sendMessage = async (req: sendMessageT, res: Response) => {
                 participants: [senderId, receiverId]
             })
         }
-        
+
         const newMessage = new Message({
             senderId,
             receiverId,
@@ -47,4 +45,24 @@ const sendMessage = async (req: sendMessageT, res: Response) => {
     }
 }
 
-export { sendMessage }
+const getMessages = async (req: UserIdT, res: Response) => {
+    try {
+        const { id: userToChatId } = req.params;
+        const senderId = req.user?._id
+
+        const conversation = await Conversation.findOne({
+            participants: { $all: [senderId, userToChatId] }
+        }).populate("messages")
+
+        if (!conversation) return res.status(200).json([])
+
+        const messages = conversation.messages
+
+        res.status(200).json(messages)
+    } catch (e: any) {
+        console.log("Error in getMessages controller:", e.message);
+        res.status(500).json({ error: "Internal Server Error" })
+    }
+}
+
+export { sendMessage, getMessages }
