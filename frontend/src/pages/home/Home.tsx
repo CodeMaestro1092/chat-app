@@ -1,3 +1,4 @@
+import MessageContainer from "../../components/messages/MessageContainer";
 import Sidebar from "../../components/sidebar/Sidebar";
 
 const Home = () => {
@@ -7,6 +8,7 @@ const Home = () => {
         backdrop-blur-lg bg-opacity-0"
     >
       <Sidebar />
+      <MessageContainer/>
     </div>
   );
 };
