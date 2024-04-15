@@ -1,3 +1,4 @@
+import GenderCheckbox from "../../components/SignUpComponents/GenderCheckbox";
 
 const SignUp = () => {
   return (
@@ -51,6 +52,8 @@ const SignUp = () => {
               className="w-full input input-bordered h-10"
             />
           </div>
+
+          <GenderCheckbox />
 
           <a
             href="#"
