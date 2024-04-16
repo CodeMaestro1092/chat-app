@@ -1,10 +1,20 @@
-import {create} from 'zustand'
+import { create } from 'zustand'
+import { ConversationT } from '../components/sidebar/Conversations';
 
-const useConversation = create((set) => ({
+type useConversationT = {
+    selectedConversation: null | ConversationT;
+    setSelectedConversation: (selectedConversation: ConversationT | null) => void;
+    messages: string[];
+    setMessages: (messages: string[]) => void;
+
+}
+
+const useConversation = create<useConversationT>((set) => ({
     selectedConversation: null,
-    setSelectedConversation: (selectedConversation: any) => set({selectedConversation}),
+    setSelectedConversation: (selectedConversation) => set({ selectedConversation }),
     messages: [],
-    setMessages: (messages: string[]) => set({messages})
+    setMessages: (messages: string[]) => set({ messages })
 }))
 
 export default useConversation;
+

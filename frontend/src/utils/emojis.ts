@@ -128,5 +128,5 @@ export const EmojisArray: string[] = [
 ]
 
 export const getRandomEmoji = () => {
-    return EmojisArray[Math.random() * EmojisArray.length]
+    return EmojisArray[Math.floor(Math.random() * EmojisArray.length)]
 }

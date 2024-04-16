@@ -11,6 +11,8 @@ export interface ConversationT {
 }
 export interface ConversationsT {
   conversation: ConversationT;
+  emoji: string;
+  lastIndex: boolean;
 }
 
 const Conversations = () => {
