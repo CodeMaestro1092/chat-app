@@ -17,7 +17,6 @@ export interface ConversationsT {
 
 const Conversations = () => {
   const { loading, conversations } = useGetConversations();
-  console.log("Conversations:", conversations);
 
   return (
     <div className="py-2 flex flex-col overflow-auto">

@@ -1,23 +1,29 @@
-import React from 'react'
-import Message from './Message'
+import Message from "./Message";
+import useGetMessages from "../../hooks/useGetMessages";
+import MessageSkeleton from "../skeletons/MessageSkeleton";
 
-const Messages = () => {
-  return (
-    <div className='px-4 flex-1 overflow-auto'>
-        <Message/>
-        <Message/>
-        <Message/>
-        <Message/>
-        <Message/>
-        <Message/>
-        <Message/>
-        <Message/>
-        <Message/>
-        <Message/>
-        <Message/>
-        <Message/>
-    </div>
-  )
+export type MessageT = {
+  _id: string;
+  message: string;
+  receiverId: string;
+  senderId: string;
 }
 
-export default Messages
+const Messages = () => {
+  const { loading, messages } = useGetMessages();
+  
+  return (
+    <div className="px-4 flex-1 overflow-auto">
+      {loading && [...Array(4)].map((_, i) => <MessageSkeleton key={i} />)}
+      {!loading &&
+        messages.length > 0 &&
+        messages.map((message: MessageT) => <Message key={message._id} message={message}/>)}
+
+      {!loading && messages.length === 0 && (
+        <p className="text-center">Send a message to start the conversation</p>
+      )}
+    </div>
+  );
+};
+
+export default Messages;

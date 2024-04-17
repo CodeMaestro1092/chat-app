@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState } from "react";
 
 export type AuthContextT = {
-  authUser: string | null;
+  authUser: any;
   setAuthUser: React.Dispatch<string | null>;
 };
 

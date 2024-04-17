@@ -8,9 +8,10 @@ const MessageInput = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
     if (!message) return;
     await sendMessage(message);
-    sendMessage("");
+    setMessage("");
   };
   return (
     <form className="px-4 my-3" onSubmit={handleSubmit}>
@@ -19,6 +20,8 @@ const MessageInput = () => {
           type="text"
           className="border text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 text-white"
           placeholder="Send a message"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
         />
         <button
           type="submit"
