@@ -1,19 +1,9 @@
 import Conversation from "./Conversation";
 import useGetConversations from "../../hooks/useGetConversations";
 import { getRandomEmoji } from "../../utils/emojis";
+import { ConversationT } from "../../types/conversation";
 
-export interface ConversationT {
-  fullname: string;
-  gender: string;
-  profilePic: string;
-  username: string;
-  _id: string;
-}
-export interface ConversationsT {
-  conversation: ConversationT;
-  emoji: string;
-  lastIndex: boolean;
-}
+
 
 const Conversations = () => {
   const { loading, conversations } = useGetConversations();

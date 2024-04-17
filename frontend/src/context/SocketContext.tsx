@@ -1,11 +1,8 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useAuthContext } from "./AuthContext";
 import { Socket, io } from "socket.io-client";
+import { SocketContextProps } from "../types/socket";
 
-interface SocketContextProps {
-  socket: Socket | null;
-  onlineUsers: string[]; // Update type to allow null
-}
 
 const SocketContext = createContext<SocketContextProps | undefined>(undefined);
 

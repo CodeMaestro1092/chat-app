@@ -1,6 +1,6 @@
 import { create } from 'zustand'
-import { ConversationT } from '../components/sidebar/Conversations';
-import { MessageT } from '../components/messages/Messages';
+import { MessageT } from '../types/messages';
+import { ConversationT } from '../types/conversation';
 
 type useConversationT = {
     selectedConversation: null | ConversationT;

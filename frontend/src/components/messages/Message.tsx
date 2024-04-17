@@ -1,7 +1,7 @@
-import { MessageT } from "./Messages";
 import { useAuthContext } from "../../context/AuthContext";
 import useConversation from "../../zustand/useConversation";
 import { FormatDate } from "../../utils/formatDate";
+import { MessageT } from "../../types/messages";
 
 const Message = ({ message }: { message: MessageT }) => {
   const { authUser } = useAuthContext();
@@ -23,7 +23,9 @@ const Message = ({ message }: { message: MessageT }) => {
           <img src={profilePic} alt="Tailwind CSS chat bubble component" />
         </div>
       </div>
-      <div className={`chat-bubble text-white ${bubbleBgColor} ${shakeClass} pb-2`}>
+      <div
+        className={`chat-bubble text-white ${bubbleBgColor} ${shakeClass} pb-2`}
+      >
         {message.message}
       </div>
       <div className="chat-footer opacity-50 text-xs flex gap-1 items-center">

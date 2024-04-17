@@ -3,15 +3,7 @@ import useGetMessages from "../../hooks/useGetMessages";
 import MessageSkeleton from "../skeletons/MessageSkeleton";
 import { useEffect, useRef } from "react";
 import useListenMessages from "../../hooks/useListenMessages";
-
-export type MessageT = {
-  _id: string;
-  message: string;
-  receiverId: string;
-  senderId: string;
-  createdAt: string;
-  shouldShake: boolean;
-};
+import { MessageT } from "../../types/messages";
 
 const Messages = () => {
   const { loading, messages } = useGetMessages();

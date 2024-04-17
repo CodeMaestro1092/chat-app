@@ -1,4 +1,3 @@
-import React from "react";
 import { BiLogOut } from "react-icons/bi";
 import useLogout from "../../hooks/useLogout";
 

@@ -2,16 +2,9 @@ import { Link } from "react-router-dom";
 import GenderCheckbox from "../../components/SignUpComponents/GenderCheckbox";
 import { useState } from "react";
 import useSignup from '../../hooks/useSignup'
+import { GenderT, SignUpInputsT } from "../../types/auth";
 
-export type GenderT = "male" | "female" | "";
 
-export interface SignUpInputsT {
-  fullname: string;
-  username: string;
-  password: string;
-  confirmPassword: string;
-  gender: GenderT;
-}
 
 const SignUp = () => {
   const [inputs, setInputs] = useState<SignUpInputsT>({

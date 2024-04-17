@@ -1,5 +1,5 @@
 import React from "react";
-import { GenderT } from "../../pages/signUp/SignUp";
+import { GenderT } from "../../types/auth";
 
 
 interface GenderCheckboxT {
