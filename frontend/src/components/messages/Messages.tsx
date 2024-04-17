@@ -2,6 +2,7 @@ import Message from "./Message";
 import useGetMessages from "../../hooks/useGetMessages";
 import MessageSkeleton from "../skeletons/MessageSkeleton";
 import { useEffect, useRef } from "react";
+import useListenMessages from "../../hooks/useListenMessages";
 
 export type MessageT = {
   _id: string;
@@ -9,10 +10,12 @@ export type MessageT = {
   receiverId: string;
   senderId: string;
   createdAt: string;
+  shouldShake: boolean;
 };
 
 const Messages = () => {
   const { loading, messages } = useGetMessages();
+  useListenMessages();
   const lastMessageRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
