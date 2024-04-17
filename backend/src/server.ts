@@ -7,12 +7,14 @@ import messageRoutes from './routes/message.routes';
 import userRoutes from './routes/user.routes'
 
 import connectToMongoDB from './db/connectToDB';
+import cors from 'cors';
 
 const app = express();
 const PORT = config.port || 4000
 
 //middleware
 app.use(express.json())
+app.use(cors())
 app.use(cookieParser())
 
 //routes
