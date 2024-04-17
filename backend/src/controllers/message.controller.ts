@@ -1,6 +1,7 @@
 import { Response, Request } from "express";
 import Conversation from "../models/conversation.model";
 import Message from "../models/message.model";
+import { getReceiverSocketId, io } from "../socket/socket";
 
 export interface UserIdT extends Request {
     user?: {
@@ -32,11 +33,16 @@ const sendMessage = async (req: UserIdT, res: Response) => {
             message
         });
 
-        await newMessage.save();
-
         if (newMessage) {
             conversation.messages.push(newMessage._id);
-            await conversation.save();
+        }
+
+        await newMessage.save();
+        await conversation.save();
+
+        const receiverSocketId = getReceiverSocketId(receiverId);
+        if(receiverSocketId){
+            io.to(receiverSocketId).emit("newMessage", newMessage)
         }
 
         res.status(201).json(newMessage);
@@ -50,11 +56,11 @@ const getMessages = async (req: UserIdT, res: Response) => {
     try {
         const { id: userToChatId } = req.params;
         const senderId = req.user?._id;
-        
+
         const conversation = await Conversation.findOne({
-			participants: { $all: [senderId, userToChatId] },
-		}).populate("messages")
-        
+            participants: { $all: [senderId, userToChatId] },
+        }).populate("messages")
+
 
         if (!conversation) return res.status(200).json([]);
 
